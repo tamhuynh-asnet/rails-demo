@@ -1,7 +1,13 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
-
+require 'rails'
+require 'sprockets/railtie'
+require "active_model/railtie"
+# require "active_job/railtie"
+require "active_record/railtie"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+# require "action_view/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -22,5 +28,32 @@ module Demo
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Config auto load path
+    config.paths.add File.join('app', 'services'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'services', '*')]
+
+    
+    # Config auto load path
+    config.autoload_paths += %W( #{config.root}/app)
+
+    config.generators do |g|
+      g.test_framework  :minitest, spec: true, fixture: false
+      g.helpers         false
+      g.orm             :active_record
+      g.template_engine nil
+      g.stylesheets     false
+      g.javascripts     false
+    end
+
+        # CORS middleware
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
+      end
+    end
+
+
   end
 end
