@@ -7,4 +7,5 @@ module RestaurantsRepresenter
   # property :name  
   # property :latitude  
   # property :longtitude  
+  collection :entries, extend: RestaurantRepresenter, as: :restaurants, embedded: true
 end

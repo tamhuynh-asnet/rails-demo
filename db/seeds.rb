@@ -3,5 +3,5 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+  cities = Restaurant.create([{ name: 'Chicago1', latitude: 1223243, longtitude: 222223 }, { name: 'Chicago2', latitude: 1223243, longtitude: 222223 }, { name: 'Chicago3', latitude: 1223243, longtitude: 222223 }])
+  # Mayor.create(name: 'Emanuel', city: cities.first)
